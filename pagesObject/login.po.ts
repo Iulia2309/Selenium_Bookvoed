@@ -10,14 +10,14 @@ export class LoginPage {
     private find = (cssPath: string) => { 
         return this.browser.findElement(By.css(cssPath));
     }
-    email = () => this.find('[id = "auth_form-login-input"]');
-    password = () => this.find('[id = "auth_form-password-input"]');
-    submit = () => this.find('[class = "span.gr"]');
+    email = () => this.find('#auth_form-login-input');
+    password = () => this.find('#auth_form-password-input');
+    submit = () => this.find('#auth_form [type="submit"]');
+    authForm = () => this.find('#auth_form [type="submit"]');
+    
 
-    isPage() {
-        this.browser.sleep(3000);
-        let blockOnLoginPage = this.find('#auth_form');
-        return this.seleniumUtils.existElement(blockOnLoginPage);
+    async isPage() {
+        return await this.seleniumUtils.existElement(this.authForm());
     }
 
     isLoad = () => this.seleniumUtils.wait('#auth_form');

@@ -1,21 +1,22 @@
 import { WebDriver, By } from "selenium-webdriver";
 import { SeleniumUtils } from "../utils/se.utils";
-import { url } from "inspector";
 
-export class Page1 {
+export class MainPage {
     constructor(private browser: WebDriver) { }
 
     private seleniumUtils = new SeleniumUtils(this.browser);
     private find = (cssPath: string) => { 
         return this.browser.findElement(By.css(cssPath));
     }
-    profile = () => this.find('[class = "Zib"]');
+
+    profile = () => this.find('#target_cbPopup');
+    profileLogin = () => this.find('.Tib .Zib');
+    baner = () => this.find('#cached_component_1-banners');
+
 
     async isPage() {
-        this.browser.sleep(3000);
-        let url = await this.browser.getCurrentUrl();
-        return url == 'https://www.bookvoed.ru/';
+        return await this.seleniumUtils.existElement(this.baner())
     }
 
-    isLoad = () => this.seleniumUtils.wait('#index_map-map_map');
+    isLoad = () => this.seleniumUtils.wait('#cached_component_1-banners');
 }
